@@ -1,0 +1,22 @@
+# Hackathon detection examples. These are deliberately simple and explainable.
+rules:
+  - id: USB_EXEC_CHAIN
+    title: USB execution chain
+    conditions: [usb_insert, process_start]
+    window_seconds: 30
+    score: 25
+  - id: REMOTE_PROCESS
+    title: Remote access followed by process execution
+    conditions: [remote_logon, process_start]
+    window_seconds: 30
+    score: 20
+  - id: PERSISTENCE_AFTER_PROCESS
+    title: Persistence change after process execution
+    conditions: [process_start, scheduled_task_create]
+    window_seconds: 60
+    score: 25
+  - id: EXTERNAL_NETWORK
+    title: External network connection
+    conditions: [process_start, network_connection]
+    window_seconds: 30
+    score: 15
